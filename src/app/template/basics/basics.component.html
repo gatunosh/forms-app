@@ -1,0 +1,89 @@
+<h2>Basics Template</h2>
+
+<div class="row">
+    <div class="col">
+
+        <form (ngSubmit)="save()" 
+               #templateForm="ngForm"
+            autocomplete="off">
+
+            <!-- Product Field -->
+            <div class="mb-3 row">
+                <label class="col-sm col-form-label">Product</label>
+                <div class="col-sm-9">
+
+                    <input type="text" 
+                            class="form-control"
+                            ngModel
+                            name="product"
+                            required
+                            placeholder="Product name"
+                            minlength="3"/>
+                    <span class="form-text text-danger"
+                            *ngIf="validName()">
+                        It must be at least three letters
+                    </span>
+                </div>
+            </div>
+
+            <!-- Price Field -->
+            <div class="mb-3 row">
+                <label class="col-sm col-form-label">Price</label>
+                <div class="col-sm-9">
+                    <input type="number" 
+                            ngModel
+                            name="price"
+                            class="form-control"
+                            required
+                            min="0"
+                            placeholder="Product price"/>
+                    
+                    <span class="form-text text-danger"
+                            *ngIf="validPrice()">
+                        The price must be grather or equal than 0
+                    </span>
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="mb-3 row">
+                <label class="col-sm col-form-label">Quantity</label>
+                <div class="col-sm-9">
+                    <input type="number" 
+                            ngModel
+                            name="qty"
+                            class="form-control"
+                            placeholder="Product quantity"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            [disabled]="!templateForm.valid"
+                            class="btn btn-primary float-end">
+                        Save
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <span> Valid </span>
+        <pre> {{ templateForm.valid }} </pre>
+
+        <span> Pristine </span>
+        <pre> {{ templateForm.pristine }} </pre>
+
+        <span> Touched </span>
+        <pre> {{ templateForm.touched }} </pre>
+
+        <span> Value </span>
+        <pre> {{ templateForm.value | json }} </pre>
+    </div>
+</div>
