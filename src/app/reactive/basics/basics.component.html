@@ -1,1 +1,88 @@
-<p>basics works!</p>
+<h2>Basics Reactive</h2>
+
+<div class="row">
+    <div class="col">
+
+        <form (ngSubmit)="save()" autocomplete="off" [formGroup]="myForm">
+
+            <!-- Product Field -->
+            <div class="mb-3 row">
+                <label class="col-sm col-form-label">Product</label>
+                <div class="col-sm-9">
+
+                    <input type="text" 
+                            class="form-control"
+                            formControlName="name"
+                            placeholder="Product name"
+                    />
+                    <span class="form-text text-danger"
+                            *ngIf="fieldIsNotValid('name')"
+                    >
+                        It must be at least three letters
+                    </span>
+                </div>
+            </div>
+
+            <!-- Price Field -->
+            <div class="mb-3 row">
+                <label class="col-sm col-form-label">Price</label>
+                <div class="col-sm-9">
+                    <input type="number" 
+                            formControlName="price"
+                            class="form-control"
+                            placeholder="Product price"/>
+                    
+                    <span class="form-text text-danger"
+                            *ngIf="fieldIsNotValid('price')"
+                    >
+                        The price must be grather or equal than 0
+                    </span>
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="mb-3 row">
+                <label class="col-sm col-form-label">Quantity</label>
+                <div class="col-sm-9">
+                    <input type="number" 
+                            formControlName="qty"
+                            class="form-control"
+                            placeholder="Product quantity"/>
+
+                    <span class="form-text text-danger"
+                        *ngIf="fieldIsNotValid('qty')"
+                    >
+                        The quantity must be grather or equal than 0
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end">
+                        Save
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <span> Valid </span>
+        <pre> {{ myForm.valid }} </pre>
+
+        <span> Pristine </span>
+        <pre> {{ myForm.pristine }} </pre>
+
+        <span> Touched </span>
+        <pre> {{ myForm.touched }} </pre>
+
+        <span> Value </span>
+        <pre> {{ myForm.value | json }} </pre>
+    </div>
+</div>

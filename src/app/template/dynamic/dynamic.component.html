@@ -1,1 +1,88 @@
-<p>dynamic works!</p>
+<h2>Dynamic Template</h2>
+
+<hr>
+
+<form (ngSubmit)="save()" autocomplete="off" #dynamicForm="ngForm">
+
+    <!-- Username -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+
+            <input type="text"
+                    [(ngModel)]="person.username"
+                    name="username"
+                    class="form-control" 
+                    placeholder="Username"
+                    required />
+
+            <span class="form-text text-danger"
+            *ngIf="dynamicForm.controls['username']?.errors">
+                This field is mandatory
+            </span>
+
+        </div>
+    </div>
+
+    <!-- Add fav -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Add</label>
+        <div class="col-sm-9">
+
+            <div class="input-group">
+                <input type="text"
+                        class="form-control" 
+                        placeholder="Add favorite game"
+                        [(ngModel)]="newGame"
+                        name="favoriteName"
+                        (keyup.enter)="insertGame()"
+                         />
+                <button class="btn btn-outline-primary"
+                        type="button"
+                        (click)="insertGame()">
+                    Add
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- List of videogames -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Favorites</label>
+        <div class="col-sm-9">
+
+            <div class="input-group mb-1"
+                *ngFor="let favorite of person.favorites; let i = index;">
+                <input class="form-control" 
+                    
+                    name="favorite_{{i}}"
+                    [(ngModel)]="favorite.name" 
+                    required/>
+                <button class="btn btn-outline-danger"
+                    type="button"
+                    (click)="delete(i)">
+                    Delete
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" 
+                    (click)="save()"
+                    [disabled]="!dynamicForm.valid"
+                    class="btn btn-primary float-end">
+                Save
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<span>User</span>
+<pre>
+    {{ person | json }}
+</pre>
