@@ -17,3 +17,13 @@
         {{ menu.text }}
     </li>
 </ul>
+
+<h2>Validations</h2>
+<ul class="list-group">
+    <li *ngFor="let menu of authMenu"
+        class="list-group-item" 
+        [routerLink]="[menu.path]"
+        routerLinkActive="active">
+        {{ menu.text }}
+    </li>
+</ul>
